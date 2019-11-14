@@ -1,0 +1,15 @@
+p {
+	color: white;
+	text-decoration: none;
+	letter-spacing: 0.2em;
+	margin: 20px;
+}
+
+p:hover {
+	cursor: pointer;
+}
+
+#registration-options {
+	display: flex;
+	justify-content: center;
+}

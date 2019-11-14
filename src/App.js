@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import LandingPage from './components/LandingPage';
 import Nav from './components/Nav';
+import About from './components/About.js';
 import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
 import './App.css';
+import { Route, Link, Switch, Redirect } from 'react-router-dom';
 
 class App extends Component {
 	constructor(props) {
@@ -30,6 +33,7 @@ class App extends Component {
 
 	handle_login = (e, data) => {
 		e.preventDefault();
+
 		fetch('http://localhost:8000/token-auth/', {
 			method: 'POST',
 			headers: {
@@ -45,6 +49,9 @@ class App extends Component {
 					displayed_form: '',
 					username: json.user.username
 				});
+			})
+			.catch(err => {
+				console.error(err);
 			});
 	};
 
@@ -72,7 +79,6 @@ class App extends Component {
 		localStorage.removeItem('token');
 		this.setState({ logged_in: false, username: '' });
 	};
-
 	display_form = form => {
 		this.setState({
 			displayed_form: form
@@ -94,17 +100,20 @@ class App extends Component {
 
 		return (
 			<div className="App">
+				<Switch>
+					<Route exact={true} path="/" component={LandingPage} />
+					<Route exact={true} path="/about" component={About} />
+				</Switch>
+
+				<h3>
+					{this.state.logged_in && `Hello, ${this.state.username}`}
+				</h3>
 				<Nav
 					logged_in={this.state.logged_in}
 					display_form={this.display_form}
 					handle_logout={this.handle_logout}
 				/>
 				{form}
-				<h3>
-					{this.state.logged_in
-						? `Hello, ${this.state.username}`
-						: 'Please Log In'}
-				</h3>
 			</div>
 		);
 	}

@@ -1,0 +1,34 @@
+.auth-forms {
+	margin-top: 20px;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+label {
+	letter-spacing: 0.2em;
+}
+
+input {
+	width: 100%;
+	padding: 5px 10px;
+	font-size: 14px;
+}
+
+input:focus {
+	outline: none;
+	border: 2px solid black;
+}
+
+input.submit-button {
+	width: 50%;
+	margin: 20px auto;
+	font-family: 'Montserrat', sans-serif;
+	background-color: white;
+	padding: 5px 10px;
+	border: 2px solid transparent;
+}
+
+.submit-button:hover {
+	cursor: pointer;
+}
