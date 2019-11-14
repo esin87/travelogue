@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import LandingPage from './components/LandingPage';
 import Nav from './components/Nav';
 import About from './components/About.js';
 import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
+import UserHome from './components/UserHome';
 import './App.css';
-import { Route, Link, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 class App extends Component {
 	constructor(props) {
@@ -101,8 +101,12 @@ class App extends Component {
 		return (
 			<div className="App">
 				<Switch>
-					<Route exact={true} path="/" component={LandingPage} />
 					<Route exact={true} path="/about" component={About} />
+					<Route
+						exact={true}
+						path="/:username"
+						render={routerProps => <UserHome {...routerProps} />}
+					/>
 				</Switch>
 
 				<h3>
