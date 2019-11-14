@@ -5,7 +5,7 @@ import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
 import UserHome from './components/UserHome';
 import './App.css';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 class App extends Component {
 	constructor(props) {
@@ -105,19 +105,29 @@ class App extends Component {
 					<Route
 						exact={true}
 						path="/:username"
-						render={routerProps => <UserHome {...routerProps} />}
+						render={routerProps => (
+							<UserHome
+								{...routerProps}
+								username={this.state.username}
+							/>
+						)}
 					/>
+					<Redirect to="/" />
 				</Switch>
 
-				<h3>
-					{this.state.logged_in && `Hello, ${this.state.username}`}
-				</h3>
 				<Nav
 					logged_in={this.state.logged_in}
 					display_form={this.display_form}
 					handle_logout={this.handle_logout}
 				/>
 				{form}
+
+				<h3>
+					{this.state.logged_in && (
+						<Redirect to={`/${this.state.username}`} />
+					)}
+					{!this.state.logged_in && <Redirect to="/" />}
+				</h3>
 			</div>
 		);
 	}
