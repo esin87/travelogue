@@ -1,12 +1,4 @@
-body {
-	background-color: black;
-	background-image: url('../assets/images/cinque-terre-828614_1920.jpg');
-	color: white;
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-position: center;
-	font-family: 'Montserrat', sans-serif;
-}
+
 
 h1 {
 	letter-spacing: 0.2em;

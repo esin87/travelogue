@@ -8,3 +8,15 @@ input {
 	display: block;
 	margin: 5px 0 5px;
 }
+
+html,
+body {
+	height: 100%;
+	width: 100%;
+	background-color: black;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	font-family: 'Montserrat', sans-serif;
+	color: white;
+}
