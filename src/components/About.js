@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Link, Switch, Redirect } from 'react-router-dom';
+// import { Route, Link, Switch, Redirect } from 'react-router-dom';
 import './About.css';
 
 class About extends React.Component {
