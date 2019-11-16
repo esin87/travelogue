@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Create.css';
-import Axios from 'axios';
+
 function validate(title, place_name, photo_url, notes) {
 	return {
 		title: title.length === 0,
@@ -51,13 +51,21 @@ class Create extends Component {
 			notes: this.state.notes
 		};
 
-		Axios.post('http://localhost:8000/api/entries', entry)
+		fetch('http://localhost:8000/api/entries', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `JWT ${localStorage.getItem('token')}`
+			},
+			body: JSON.stringify(entry)
+		})
 			.then(res => {
+				console.log(res);
 				setTimeout(() => {
 					this.props.history.push({
 						pathname: `/${this.props.username}`
 					});
-				}, 1000);
+				}, 2000);
 			})
 			.catch(err => {
 				console.error(err);
@@ -80,6 +88,7 @@ class Create extends Component {
 		);
 
 		const isEnabled = !Object.keys(errors).some(x => errors[x]);
+
 		return (
 			<div className="new-form-container">
 				<h2>This is where we will create a new entry</h2>
@@ -135,6 +144,7 @@ class Create extends Component {
 						value="Submit"
 						disabled={!isEnabled}
 					/>
+					<br />
 					*All fields required.
 				</form>
 			</div>

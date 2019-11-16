@@ -1,0 +1,12 @@
+.entry-details {
+	display: flex;
+	flex-direction: row;
+}
+
+/* .containers {
+	flex-basis: 50%;
+} */
+
+.entry-details p {
+	margin: 0;
+}

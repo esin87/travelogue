@@ -1,22 +1,31 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 
-.App {
-	margin-left: 20px;
-}
-
-input {
-	display: block;
-	margin: 5px 0 5px;
-}
-
 html,
 body {
-	height: 100%;
 	width: 100%;
+	font-family: 'Montserrat', sans-serif;
+	color: white;
+	/* background-image: url('./assets/images/cinque-terre-828614_1920.jpg'); */
 	background-color: black;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-position: center;
-	font-family: 'Montserrat', sans-serif;
-	color: white;
+}
+
+html,
+body,
+.App {
+	height: 100%;
+	width: 100%;
+	position: absolute;
+}
+
+.logged-in-nav {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+p {
+	white-space: pre-wrap;
 }

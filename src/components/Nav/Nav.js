@@ -17,12 +17,12 @@ function Nav(props) {
 		</div>
 	);
 
-	const logged_in_nav = (
-		<ul>
-			<li onClick={props.handle_logout}>logout</li>
-		</ul>
-	);
-	return <div>{props.logged_in ? logged_in_nav : logged_out_nav}</div>;
+	// const logged_in_nav = (
+	// 	<ul>
+	// 		<li onClick={props.handle_logout}>logout</li>
+	// 	</ul>
+	// );
+	return <div>{props.logged_in ? null : logged_out_nav}</div>;
 }
 
 export default Nav;

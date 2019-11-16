@@ -1,23 +1,32 @@
-.auth-forms {
+.new-form-container {
+	width: 80%;
+	margin: 0 auto;
+	margin-top: 20px;
+}
+
+.new-form {
 	margin-top: 20px;
 	width: 100%;
-	display: flex;
-	justify-content: center;
 }
 
 label {
 	letter-spacing: 0.2em;
 }
 
-input {
+input,
+textarea {
 	width: 100%;
 	padding: 5px 10px;
 	font-size: 14px;
 }
 
-input:focus {
+input:focus,
+textarea:focus {
 	outline: none;
-	border: 2px solid black;
+}
+
+textarea {
+	border: 1px solid transparent;
 }
 
 input.submit-button {
@@ -26,9 +35,13 @@ input.submit-button {
 	font-family: 'Montserrat', sans-serif;
 	background-color: white;
 	padding: 5px 10px;
-	border: 2px solid transparent;
+	border: 1px solid transparent;
 }
 
 .submit-button:hover {
 	cursor: pointer;
+}
+
+.error {
+	border: 1px solid red;
 }

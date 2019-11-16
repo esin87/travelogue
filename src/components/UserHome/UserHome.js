@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
 // import entries from './entries.json';
-import Entry from './Entry';
+import Entry from '../Entry/Entry';
 import { Link } from 'react-router-dom';
-
+import Axios from 'axios';
 import './UserHome.css';
 
 class UserHome extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			entries: this.props.entries
+			entries: 'this.props.entries'
 		};
+	}
+
+	componentDidMount() {
+		Axios.get('http://localhost:8000/api/entries')
+			.then(response => {
+				this.setState({ entries: response.data });
+			})
+			.catch(err => console.error(err));
 	}
 	render() {
 		let filteredEntries = this.props.entries.filter(
@@ -25,18 +33,17 @@ class UserHome extends Component {
 						photo={entry.photo_url}
 						place={entry.place_name}
 						notes={entry.notes}
-						author={entry.owner}
+						owner={entry.owner}
+						id={entry.id}
+						date={entry.date}
 					/>
 				</div>
 			);
 		});
 		return (
 			<div>
-				<h1>Hello, {this.props.username}</h1>
-				<Link to={`${this.props.username}/create`}>
-					<p>Create a new entry</p>
-				</Link>
-				{listOfEntries}
+				<h2>Hello, {this.props.username}</h2>
+				<div className="entries-container">{listOfEntries}</div>
 			</div>
 		);
 	}
