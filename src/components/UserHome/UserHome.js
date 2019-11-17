@@ -41,6 +41,8 @@ class UserHome extends Component {
 		});
 		return (
 			<div className="user-home-container">
+				<h1>My Entries</h1>
+				<p>Click on an entry to view, edit or delete.</p>
 				<div className="entries-container">{listOfEntries}</div>
 			</div>
 		);

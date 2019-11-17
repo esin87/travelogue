@@ -66,7 +66,16 @@ class EntryDetail extends Component {
 					<p className="byline">By: {this.state.entry.owner}</p>
 					<p className="notes">{this.state.entry.notes}</p>
 					<p>Posted on: {this.state.entry.date}</p>
-					<p onClick={this.delete} className="delete-link">
+					<p
+						className="delete-link"
+						onClick={() => {
+							if (
+								window.confirm(
+									'Are you sure you wish to delete this entry?'
+								)
+							)
+								this.delete();
+						}}>
 						DELETE
 					</p>
 				</div>

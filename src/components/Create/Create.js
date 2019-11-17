@@ -14,6 +14,7 @@ class Create extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			username: this.props.match.params.username,
 			title: '',
 			place_name: '',
 			photo_url: '',
@@ -60,10 +61,9 @@ class Create extends Component {
 			body: JSON.stringify(entry)
 		})
 			.then(res => {
-				console.log(res);
 				setTimeout(() => {
 					this.props.history.push({
-						pathname: `/${this.props.username}`
+						pathname: `/${this.state.username}`
 					});
 				}, 2000);
 			})
@@ -88,7 +88,6 @@ class Create extends Component {
 		);
 
 		const isEnabled = !Object.keys(errors).some(x => errors[x]);
-
 		return (
 			<div className="new-form-container">
 				<h2>Create New Entry</h2>
@@ -138,14 +137,16 @@ class Create extends Component {
 						onChange={this.handleChange}
 						placeholder="It was a dark and stormy night in Budapest ... "
 					/>
-					<input
-						className="submit-button"
-						type="submit"
-						value="Submit"
-						disabled={!isEnabled}
-					/>
-					<br />
 					*All fields required.
+					<br />
+					<div className="submit-button-container">
+						<input
+							className="submit-button"
+							type="submit"
+							value="Submit"
+							disabled={!isEnabled}
+						/>
+					</div>
 				</form>
 			</div>
 		);

@@ -155,12 +155,14 @@ class Edit extends Component {
 						onChange={this.handleChange}
 						placeholder="It was a dark and stormy night in Budapest ... "
 					/>
-					<input
-						className="submit-button"
-						type="submit"
-						value="Submit"
-						disabled={!isEnabled}
-					/>
+					<div className="submit-button-container">
+						<input
+							className="submit-button"
+							type="submit"
+							value="Submit"
+							disabled={!isEnabled}
+						/>
+					</div>
 					*All fields required.
 				</form>
 			</div>

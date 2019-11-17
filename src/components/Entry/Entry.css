@@ -1,19 +1,30 @@
 img {
-	height: 200px;
-	max-width: 100%;
+	display: block;
+	width: 100%;
+	max-height: auto;
+	height: 300px;
+	margin: 0 auto;
+	object-fit: cover;
 }
 
 .entry {
-	width: 85%;
-	flex-basis: 50%;
+	height: 400px;
+	/* width: 85%; */
+	flex-basis: 25%;
+	flex-grow: 1;
+	border: 1px solid white;
+	margin: 15px;
+	padding: 10px 20px;
 }
 
 .entry p {
-	margin: 0;
+	margin: 10px;
+	text-align: center;
 }
 
 .entry-card {
 	display: flex;
+	width: 100%;
 	flex-direction: column;
 	align-items: stretch;
 	margin-bottom: 30px;
@@ -21,5 +32,5 @@ img {
 }
 
 .entry-card h3 {
-	text-align: left;
+	text-align: center;
 }
