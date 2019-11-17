@@ -1,6 +1,6 @@
 .entry-details {
 	margin: 80px auto;
-	width: 80%;
+	width: 70%;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -25,6 +25,7 @@
 img.detail-image {
 	width: 100%;
 	height: auto;
+	margin-bottom: 30px;
 }
 
 .place-name {
@@ -38,6 +39,10 @@ h2.entry-heading {
 
 p.byline {
 	text-transform: capitalize;
+}
+
+p.notes {
+	text-align: justify;
 }
 
 p.notes,
@@ -57,4 +62,8 @@ p.delete-link {
 
 p.delete-link:hover {
 	cursor: pointer;
+}
+
+p.map-caption {
+	margin-top: 10px;
 }

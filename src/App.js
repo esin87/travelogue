@@ -16,10 +16,11 @@ import Axios from 'axios';
 
 //Background image
 import CinqueTerre from './assets/images/cinque-terre-828614_1920.jpg';
-import Neuschwannstein from './assets/images/architecture-3095716_1920.jpg';
-import BritishColumbia from './assets/images/british-columbia-3787200_1920.jpg';
-import BoraBora from './assets/images/bora-bora-685303_1920.jpg';
-import Hamburg from './assets/images/hamburg-3846525_1920.jpg';
+// Other background image options
+// import Neuschwannstein from './assets/images/architecture-3095716_1920.jpg';
+// import BritishColumbia from './assets/images/british-columbia-3787200_1920.jpg';
+// import BoraBora from './assets/images/bora-bora-685303_1920.jpg';
+// import Hamburg from './assets/images/hamburg-3846525_1920.jpg';
 
 class App extends Component {
 	constructor(props) {

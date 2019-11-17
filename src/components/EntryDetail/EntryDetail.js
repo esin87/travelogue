@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Axios from 'axios';
 import './EntryDetail.css';
 import { Link } from 'react-router-dom';
+import GoogleMap from '../Map';
 
 class EntryDetail extends Component {
 	constructor(props) {
@@ -32,7 +33,6 @@ class EntryDetail extends Component {
 			body: JSON.stringify(entry)
 		})
 			.then(res => {
-				console.log(res);
 				setTimeout(() => {
 					this.props.history.push({
 						pathname: `/${this.props.username}`
@@ -43,6 +43,7 @@ class EntryDetail extends Component {
 				console.error(err);
 			});
 	};
+
 	render() {
 		return (
 			<article className="entry-details">
@@ -50,9 +51,12 @@ class EntryDetail extends Component {
 					<img
 						className="detail-image"
 						src={this.state.entry.photo_url}
-						alt={this.state.entry.place}
+						alt={this.state.entry.place_name}
 					/>
-					<p className="place-name">{this.state.entry.place_name}</p>
+					{this.state.entry.place_name && (
+						<GoogleMap placeName={this.state.entry.place_name} />
+					)}
+					<p className="map-caption">{this.state.entry.place_name}</p>
 				</div>
 				<div className="other-text">
 					<h2 className="entry-heading">

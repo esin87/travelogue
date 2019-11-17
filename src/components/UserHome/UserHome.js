@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 // import entries from './entries.json';
 import Entry from '../Entry/Entry';
-import { Link } from 'react-router-dom';
 import Axios from 'axios';
 import './UserHome.css';
 
