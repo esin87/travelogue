@@ -41,8 +41,7 @@ class UserHome extends Component {
 			);
 		});
 		return (
-			<div>
-				<h2>Hello, {this.props.username}</h2>
+			<div className="user-home-container">
 				<div className="entries-container">{listOfEntries}</div>
 			</div>
 		);

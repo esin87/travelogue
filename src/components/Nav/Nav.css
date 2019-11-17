@@ -21,7 +21,7 @@ p {
 	margin: 20px;
 }
 
-p:hover {
+p.log-in-buttons:hover {
 	cursor: pointer;
 }
 

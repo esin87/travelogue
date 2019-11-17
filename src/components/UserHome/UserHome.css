@@ -3,3 +3,8 @@
 	flex-direction: row;
 	flex-wrap: wrap;
 }
+
+.user-home-container {
+	margin: 10px auto;
+	width: 85%;
+}

@@ -1,12 +1,60 @@
 .entry-details {
+	margin: 80px auto;
+	width: 80%;
 	display: flex;
 	flex-direction: row;
+	justify-content: space-between;
 }
 
-/* .containers {
+.image-and-caption {
+	display: flex;
+	flex-direction: column;
 	flex-basis: 50%;
-} */
+}
+
+.other-text {
+	flex-basis: 50%;
+	margin-left: 20px;
+}
 
 .entry-details p {
 	margin: 0;
+	margin-bottom: 10px;
+}
+
+img.detail-image {
+	width: 100%;
+	height: auto;
+}
+
+.place-name {
+	text-align: center;
+	margin-bottom: 15px;
+}
+
+h2.entry-heading {
+	margin: 0;
+}
+
+p.byline {
+	text-transform: capitalize;
+}
+
+p.notes,
+p.byline {
+	letter-spacing: normal;
+	margin-top: 15px;
+}
+
+p.delete-link {
+	padding: 5px 15px;
+	background-color: white;
+	color: black;
+	width: 20%;
+	text-align: center;
+	margin-top: 25px;
+}
+
+p.delete-link:hover {
+	cursor: pointer;
 }

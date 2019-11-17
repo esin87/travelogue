@@ -91,7 +91,7 @@ class Create extends Component {
 
 		return (
 			<div className="new-form-container">
-				<h2>This is where we will create a new entry</h2>
+				<h2>Create New Entry</h2>
 				<form onSubmit={this.handleSubmit} className="new-form">
 					{/* form input for title */}
 					<label>Title</label>

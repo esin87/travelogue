@@ -11,8 +11,16 @@ function Nav(props) {
 				<h1>TRAVELOGUE</h1>
 			</Link>
 			<div id="registration-options">
-				<p onClick={() => props.display_form('login')}>LOGIN</p>
-				<p onClick={() => props.display_form('signup')}>SIGNUP</p>
+				<p
+					className="log-in-buttons"
+					onClick={() => props.display_form('login')}>
+					LOGIN
+				</p>
+				<p
+					className="log-in-buttons"
+					onClick={() => props.display_form('signup')}>
+					SIGNUP
+				</p>
 			</div>
 		</div>
 	);

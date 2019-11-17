@@ -132,13 +132,26 @@ class App extends Component {
 					className="logged-in-nav-container"
 					style={{ display: isShown ? 'block' : 'none' }}>
 					<div className="logged-in-nav">
-						<Link to={`/${this.state.username}`}>
-							<h4>TRAVELOGUE</h4>
-						</Link>
-						<NavLink to={`${this.state.username}/create`} strict>
-							<p>New Entry</p>
-						</NavLink>
-						<p onClick={this.handle_logout}>Log Out</p>
+						<div className="logo">
+							<Link to={`/${this.state.username}`}>
+								<h4>TRAVELOGUE</h4>
+							</Link>
+						</div>
+						<div className="other-links">
+							<Link to={`/${this.state.username}`}>
+								<p className="greeting">
+									Hello, {this.state.username}!
+								</p>
+							</Link>
+							<NavLink
+								to={`${this.state.username}/create`}
+								strict>
+								<p>New Entry</p>
+							</NavLink>
+							<p onClick={this.handle_logout} className="log-out">
+								Log Out
+							</p>
+						</div>
 					</div>
 				</div>
 				{/* <Fade></Fade> */}

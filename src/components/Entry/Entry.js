@@ -9,9 +9,9 @@ class Entry extends Component {
 	}
 	render() {
 		return (
-			<div>
+			<div className="entry-card">
 				<Link to={`${this.props.owner}/entries/${this.props.id}`}>
-					<h2>{this.props.title}</h2>
+					<h3>{this.props.title}</h3>
 					<img src={this.props.photo} alt={this.props.place} />
 					<p>Posted: {this.props.date}</p>
 				</Link>

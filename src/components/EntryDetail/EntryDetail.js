@@ -46,20 +46,25 @@ class EntryDetail extends Component {
 	render() {
 		return (
 			<article className="entry-details">
-				<div className="containers">
+				<div className="image-and-caption">
 					<img
+						className="detail-image"
 						src={this.state.entry.photo_url}
 						alt={this.state.entry.place}
 					/>
-					<p>{this.state.entry.place_name}</p>
-					<h2>
+					<p className="place-name">{this.state.entry.place_name}</p>
+				</div>
+				<div className="other-text">
+					<h2 className="entry-heading">
 						{this.state.entry.title}
 						<Link to={`/edit/${this.state.entry.id}`}> (edit)</Link>
 					</h2>
-					<p>By: {this.state.entry.owner}</p>
-					<p>{this.state.entry.notes}</p>
+					<p className="byline">By: {this.state.entry.owner}</p>
+					<p className="notes">{this.state.entry.notes}</p>
 					<p>Posted on: {this.state.entry.date}</p>
-					<p onClick={this.delete}> (delete this post)</p>
+					<p onClick={this.delete} className="delete-link">
+						DELETE
+					</p>
 				</div>
 			</article>
 		);

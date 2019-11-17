@@ -10,6 +10,7 @@ body {
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-position: center;
+	margin: 0;
 }
 
 html,
@@ -23,9 +24,28 @@ body,
 .logged-in-nav {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-around;
+	justify-content: space-between;
+	margin: 15px 25px;
 }
 
 p {
 	white-space: pre-wrap;
+}
+
+.greeting {
+	text-transform: capitalize;
+}
+
+.other-links {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+}
+
+.logo {
+	letter-spacing: 0.2em;
+}
+
+p.log-out:hover {
+	cursor: pointer;
 }

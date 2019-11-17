@@ -1,15 +1,25 @@
 img {
-	width: 75%;
-	margin: 0 auto;
+	height: 200px;
+	max-width: 100%;
 }
 
 .entry {
 	width: 85%;
 	flex-basis: 50%;
-	display: flex;
-	flex-direction: column;
 }
 
 .entry p {
 	margin: 0;
+}
+
+.entry-card {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	margin-bottom: 30px;
+	margin-right: 15px;
+}
+
+.entry-card h3 {
+	text-align: left;
 }
