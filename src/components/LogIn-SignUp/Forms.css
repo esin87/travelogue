@@ -1,13 +1,27 @@
-.auth-forms {
-	margin: 20px auto;
+form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
 	width: 100%;
+}
+
+div.auth-forms {
+	margin: 20px auto;
+	width: 25%;
 	display: flex;
 	justify-content: center;
-	max-width: 200px;
+	/* max-width: 300px; */
 }
 
 label {
 	letter-spacing: 0.2em;
+	text-align: left;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	margin-left: -20px;
 }
 
 input {
@@ -26,7 +40,6 @@ input.submit-button {
 	font-family: 'Montserrat', sans-serif;
 	background-color: white;
 	padding: 5px 10px;
-	border: 1px solid transparent;
 }
 
 .submit-button:hover {

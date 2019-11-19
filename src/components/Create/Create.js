@@ -52,7 +52,7 @@ class Create extends Component {
 			notes: this.state.notes
 		};
 
-		fetch('http://localhost:8000/api/entries', {
+		fetch('https://esin-travelogue-api.herokuapp.com', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -62,10 +62,8 @@ class Create extends Component {
 		})
 			.then(res => {
 				setTimeout(() => {
-					this.props.history.push({
-						pathname: `/${this.state.username}`
-					});
-				}, 2000);
+					this.props.history.push('/');
+				}, 500);
 			})
 			.catch(err => {
 				console.error(err);

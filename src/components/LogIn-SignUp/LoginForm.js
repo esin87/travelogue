@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './Forms.css';
 
 class LoginForm extends React.Component {
 	state = {
@@ -35,7 +36,11 @@ class LoginForm extends React.Component {
 						value={this.state.password}
 						onChange={this.handle_change}
 					/>
-					<input className="submit-button" type="submit" value="LOG IN" />
+					<input
+						className="submit-button"
+						type="submit"
+						value="LOG IN"
+					/>
 				</form>
 			</div>
 		);

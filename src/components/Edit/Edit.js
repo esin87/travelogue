@@ -45,10 +45,9 @@ class Edit extends Component {
 
 	componentDidMount() {
 		Axios.get(
-			`http://localhost:8000/api/entries/${this.props.match.params.entryid}`
+			`https://esin-travelogue-api.herokuapp.com/${this.props.match.params.entryid}`
 		)
 			.then(response => {
-				console.log(response.data);
 				this.setState({
 					title: response.data.title,
 					place_name: response.data.place_name,
@@ -61,7 +60,7 @@ class Edit extends Component {
 
 	handleSubmit(evt) {
 		evt.preventDefault();
-		const url = `http://localhost:8000/api/entries/${this.props.match.params.entryid}`;
+		const url = `https://esin-travelogue-api.herokuapp.com/${this.props.match.params.entryid}`;
 		const entry = {
 			title: this.state.title,
 			place_name: this.state.place_name,

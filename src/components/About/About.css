@@ -1,3 +1,15 @@
-body {
-	color: white;
+.about {
+	width: 70%;
+	margin: 0 auto;
+	border: 1px solid white;
+	padding: 100px 100px 45px 100px;
+}
+
+.about p {
+	font-size: larger;
+}
+
+.about h1 {
+	margin: 0;
+	padding-bottom: 25px;
 }

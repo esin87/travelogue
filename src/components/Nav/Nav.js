@@ -1,15 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 
 import './Nav.css';
 
 function Nav(props) {
 	const logged_out_nav = (
 		<div>
-			<Link to="/about">
-				<h1>TRAVELOGUE</h1>
-			</Link>
+			<h1>TRAVELOGUE</h1>
 			<div id="registration-options">
 				<p
 					className="log-in-buttons"
@@ -25,11 +22,6 @@ function Nav(props) {
 		</div>
 	);
 
-	// const logged_in_nav = (
-	// 	<ul>
-	// 		<li onClick={props.handle_logout}>logout</li>
-	// 	</ul>
-	// );
 	return <div>{props.logged_in ? null : logged_out_nav}</div>;
 }
 

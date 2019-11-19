@@ -1,26 +1,21 @@
 import React, { Component } from 'react';
-// import entries from './entries.json';
 import Entry from '../Entry/Entry';
-import Axios from 'axios';
 import './UserHome.css';
 
 class UserHome extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			entries: 'this.props.entries'
+			entries: this.props.entries
 		};
 	}
 
 	componentDidMount() {
-		Axios.get('http://localhost:8000/api/entries')
-			.then(response => {
-				this.setState({ entries: response.data });
-			})
-			.catch(err => console.error(err));
+		this.props.refreshEntries();
 	}
+
 	render() {
-		let filteredEntries = this.props.entries.filter(
+		let filteredEntries = this.state.entries.filter(
 			entry => entry.owner === this.props.username
 		);
 
@@ -41,7 +36,7 @@ class UserHome extends Component {
 		});
 		return (
 			<div className="user-home-container">
-				<h1>My Entries</h1>
+				<h1 className="dashboard">My Entries</h1>
 				<p>Click on an entry to view, edit or delete.</p>
 				<div className="entries-container">{listOfEntries}</div>
 			</div>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
 import './EntryDetail.css';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import GoogleMap from '../Map';
 
 class EntryDetail extends Component {
@@ -14,7 +14,9 @@ class EntryDetail extends Component {
 	}
 
 	componentDidMount() {
-		Axios.get(`http://localhost:8000/api/entries/${this.state.entryId}`)
+		Axios.get(
+			`https://esin-travelogue-api.herokuapp.com/${this.state.entryId}`
+		)
 			.then(response => {
 				this.setState({ entry: response.data });
 			})
@@ -22,7 +24,7 @@ class EntryDetail extends Component {
 	}
 
 	delete = () => {
-		const url = `http://localhost:8000/api/entries/${this.props.match.params.entryid}`;
+		const url = `https://esin-travelogue-api.herokuapp.com/${this.props.match.params.entryid}`;
 		let entry = this.state.entry;
 		fetch(url, {
 			method: 'DELETE',
@@ -33,11 +35,7 @@ class EntryDetail extends Component {
 			body: JSON.stringify(entry)
 		})
 			.then(res => {
-				setTimeout(() => {
-					this.props.history.push({
-						pathname: `/${this.props.username}`
-					});
-				}, 2000);
+				return <Redirect to="/home" />;
 			})
 			.catch(err => {
 				console.error(err);
@@ -48,6 +46,7 @@ class EntryDetail extends Component {
 		return (
 			<article className="entry-details">
 				<div className="image-and-caption">
+					<p className="map-caption">{this.state.entry.place_name}</p>
 					<img
 						className="detail-image"
 						src={this.state.entry.photo_url}
@@ -56,7 +55,6 @@ class EntryDetail extends Component {
 					{this.state.entry.place_name && (
 						<GoogleMap placeName={this.state.entry.place_name} />
 					)}
-					<p className="map-caption">{this.state.entry.place_name}</p>
 				</div>
 				<div className="other-text">
 					<h2 className="entry-heading">

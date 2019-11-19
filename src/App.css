@@ -21,11 +21,18 @@ body,
 	position: absolute;
 }
 
+.App {
+	min-height: 100vh;
+	padding-bottom: 60px;
+}
+
 .logged-in-nav {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	margin: 15px 25px;
+	margin: 15px 25px 35px 15px;
+	/* border-bottom: 1px solid white; */
+	border-top: 1px solid white;
 }
 
 p {

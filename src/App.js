@@ -11,7 +11,7 @@ import EntryDetail from './components/EntryDetail/EntryDetail';
 // Styling
 import './App.css';
 // Dependencies
-import { Route, Switch, Redirect, NavLink, Link } from 'react-router-dom';
+import { Route, Switch, Redirect, Link } from 'react-router-dom';
 import Axios from 'axios';
 
 //Background image
@@ -22,10 +22,16 @@ import CinqueTerre from './assets/images/cinque-terre-828614_1920.jpg';
 // import BoraBora from './assets/images/bora-bora-685303_1920.jpg';
 // import Hamburg from './assets/images/hamburg-3846525_1920.jpg';
 
+//API url
+// const API_URL = process.env.REACT_APP_API_URL;
+require('dotenv').config();
+
 class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			shouldRefresh: false,
+			toHome: false,
 			displayed_form: '',
 			logged_in: localStorage.getItem('token') ? true : false,
 			username: '',
@@ -35,28 +41,34 @@ class App extends Component {
 
 	componentDidMount() {
 		if (this.state.logged_in) {
-			fetch('http://localhost:8000/core/current_user/', {
-				headers: {
-					Authorization: `JWT ${localStorage.getItem('token')}`
+			fetch(
+				'https://esin-travelogue-api.herokuapp.com/core/current_user/',
+				{
+					headers: {
+						Authorization: `JWT ${localStorage.getItem('token')}`
+					}
 				}
-			})
+			)
 				.then(res => res.json())
 				.then(json => {
 					this.setState({ username: json.username });
-				});
-
-			Axios.get('http://localhost:8000/api/entries')
-				.then(response => {
-					this.setState({ entries: response.data });
 				})
-				.catch(err => console.error(err));
+				.then(() => this.refreshEntries());
 		}
 	}
+
+	refreshEntries = () => {
+		Axios.get(`https://esin-travelogue-api.herokuapp.com`)
+			.then(res => {
+				this.setState({ entries: res.data });
+			})
+			.catch(err => console.error(err));
+	};
 
 	handle_login = (e, data) => {
 		e.preventDefault();
 
-		fetch('http://localhost:8000/token-auth/', {
+		fetch('https://esin-travelogue-api.herokuapp.com/token-auth/', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -72,6 +84,10 @@ class App extends Component {
 					username: json.user.username
 				});
 			})
+			.then(() => {
+				return <Redirect to="/home" />;
+			})
+
 			.catch(err => {
 				console.error(err);
 			});
@@ -79,7 +95,7 @@ class App extends Component {
 
 	handle_signup = (e, data) => {
 		e.preventDefault();
-		fetch('http://localhost:8000/core/users/', {
+		fetch('https://esin-travelogue-api.herokuapp.com/core/users/', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -100,7 +116,9 @@ class App extends Component {
 	handle_logout = () => {
 		localStorage.removeItem('token');
 		this.setState({ logged_in: false, username: '' });
+		return <Redirect to="/" />;
 	};
+
 	display_form = form => {
 		this.setState({
 			displayed_form: form
@@ -134,50 +152,48 @@ class App extends Component {
 					style={{ display: isShown ? 'block' : 'none' }}>
 					<div className="logged-in-nav">
 						<div className="logo">
-							<Link to={`/${this.state.username}`}>
+							<Link to={`/about`}>
 								<h4>TRAVELOGUE</h4>
 							</Link>
 						</div>
 						<div className="other-links">
-							<Link to={`/${this.state.username}`}>
+							<Link to={`/home`}>
 								<p className="greeting">
 									Hello, {this.state.username}!
 								</p>
 							</Link>
-							<NavLink
-								to={`${this.state.username}/create`}
-								strict>
+							<Link to={`/create`}>
 								<p>New Entry</p>
-							</NavLink>
+							</Link>
 							<p onClick={this.handle_logout} className="log-out">
 								Log Out
 							</p>
 						</div>
 					</div>
 				</div>
-				{/* <Fade></Fade> */}
 				<Switch>
 					<Route exact={true} path="/about" component={About} />
 					<Route
 						exact={true}
-						path="/:username"
+						path="/home"
 						render={routerProps => (
 							<UserHome
 								{...routerProps}
 								username={this.state.username}
 								entries={this.state.entries}
+								refreshEntries={this.refreshEntries}
 							/>
 						)}
 					/>
 					<Route
 						exact={true}
-						path="/:username/create"
+						path="/create"
 						username={this.state.username}
 						component={Create}
 					/>
 					<Route
 						exact={true}
-						path="/:username/entries/:entryid"
+						path="/entries/:entryid"
 						render={routerProps => <EntryDetail {...routerProps} />}
 					/>
 					<Route
@@ -190,7 +206,6 @@ class App extends Component {
 							/>
 						)}
 					/>
-					{/* <Redirect to="/" /> */}
 				</Switch>
 				<Nav
 					logged_in={this.state.logged_in}
@@ -198,13 +213,9 @@ class App extends Component {
 					handle_logout={this.handle_logout}
 				/>
 				{form}
-				<h3>
-					{this.state.logged_in && (
-						<Redirect to={`/${this.state.username}`} />
-					)}
-					{!this.state.logged_in && <Redirect to="/" />}
-				</h3>
-				{/* </div> */}
+
+				{this.state.logged_in && <Redirect to={`/home`} />}
+				{!this.state.logged_in && <Redirect to="/" />}
 			</div>
 		);
 	}
