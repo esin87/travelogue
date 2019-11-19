@@ -56,3 +56,12 @@ p {
 p.log-out:hover {
 	cursor: pointer;
 }
+
+.errorMessage {
+	text-align: center;
+	width: 50%;
+	margin: 0 auto;
+	padding: 5px;
+	font-size: larger;
+	white-space: pre-wrap;
+}

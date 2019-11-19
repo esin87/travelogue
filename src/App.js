@@ -30,7 +30,7 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			shouldRefresh: false,
+			error: false,
 			redirect: false,
 			displayed_form: '',
 			logged_in: localStorage.getItem('token') ? true : false,
@@ -63,7 +63,10 @@ class App extends Component {
 				.then(json => {
 					this.setState({ username: json.username });
 				})
-				.then(res => this.refreshEntries());
+				.then(res => this.refreshEntries())
+				.catch(err => {
+					console.error(err);
+				});
 		}
 	}
 
@@ -75,7 +78,9 @@ class App extends Component {
 			.then(res => {
 				this.setRedirect();
 			})
-			.catch(err => console.error(err));
+			.catch(err => {
+				console.error(err);
+			});
 	};
 
 	handle_login = (e, data) => {
@@ -101,6 +106,7 @@ class App extends Component {
 				this.refreshEntries();
 			})
 			.catch(err => {
+				this.setState({ error: true });
 				console.error(err);
 			});
 	};
@@ -125,6 +131,7 @@ class App extends Component {
 			});
 	};
 
+	//Log out handler
 	handle_logout = () => {
 		localStorage.removeItem('token');
 		this.setState({ logged_in: false, username: '' });
@@ -152,6 +159,10 @@ class App extends Component {
 		}
 		//use this state to determine what divs to show (mostly for logged in nav bar display)
 		const isShown = this.state.logged_in;
+
+		const logInErrorMessage = this.state.error
+			? 'That username and password combination does not exist.\nPlease try again or sign up.'
+			: null;
 
 		return (
 			<div
@@ -234,8 +245,8 @@ class App extends Component {
 					handle_logout={this.handle_logout}
 				/>
 				{form}
-
-				{this.state.logged_in && <Redirect to={`/home`} />}
+				<div className="errorMessage">{logInErrorMessage}</div>
+				{this.state.logged_in && <Redirect to="/home" />}
 				{!this.state.logged_in && <Redirect to="/" />}
 			</div>
 		);
