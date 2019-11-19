@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import Axios from 'axios';
 
-const devKey = process.env.REACT_APP_GOOGLE_API_KEY;
+const devKey = 'AIzaSyB6ON524-NE8rxEhT8w2_keiyKHmRHNyB0';
 class GoogleMap extends Component {
 	constructor(props) {
 		super(props);
@@ -14,10 +14,10 @@ class GoogleMap extends Component {
 
 	componentDidMount() {
 		if (this.state.placeName) {
-			const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.placeName}&key=${devKey}`;
-
+			const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${this.props.placeName}&key=AIzaSyB6ON524 - NE8rxEhT8w2_keiyKHmRHNyB0`;
 			Axios.get(url)
 				.then(response => {
+					console.log(response.data);
 					this.setState({
 						coordinates: response.data.results[0].geometry.location
 					});
@@ -32,7 +32,7 @@ class GoogleMap extends Component {
 				{this.state.coordinates && (
 					<GoogleMapReact
 						bootstrapURLKeys={{
-							key: devKey
+							key: 'AIzaSyB6ON524 - NE8rxEhT8w2_keiyKHmRHNyB0'
 						}}
 						center={this.state.coordinates}
 						zoom={14}
