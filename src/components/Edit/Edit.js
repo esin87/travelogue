@@ -88,10 +88,9 @@ class Edit extends Component {
 			body: JSON.stringify(entry)
 		})
 			.then(res => {
-				this.props.refreshEntries();
-			})
-			.then(res => {
-				this.setRedirect();
+				setTimeout(() => {
+					this.props.history.push('/home');
+				}, 500);
 			})
 			.catch(err => {
 				console.error(err);
