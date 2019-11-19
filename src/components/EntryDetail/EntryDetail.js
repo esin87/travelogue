@@ -9,7 +9,8 @@ class EntryDetail extends Component {
 		super(props);
 		this.state = {
 			entryId: this.props.match.params.entryid,
-			entry: ''
+			entry: '',
+			redirect: false
 		};
 	}
 
@@ -23,19 +24,30 @@ class EntryDetail extends Component {
 			.catch(err => console.error(err));
 	}
 
+	setRedirect = () => {
+		this.setState({ redirect: true });
+	};
+
+	renderRedirect = () => {
+		if (this.state.redirect) {
+			return <Redirect to="/home" />;
+		}
+	};
+
 	delete = () => {
 		const url = `https://esin-travelogue-api.herokuapp.com/${this.props.match.params.entryid}`;
-		let entry = this.state.entry;
 		fetch(url, {
 			method: 'DELETE',
 			headers: {
 				'Content-Type': 'application/json',
 				Authorization: `JWT ${localStorage.getItem('token')}`
-			},
-			body: JSON.stringify(entry)
+			}
 		})
 			.then(res => {
-				return <Redirect to="/home" />;
+				this.props.refreshEntries();
+			})
+			.then(res => {
+				this.setRedirect();
 			})
 			.catch(err => {
 				console.error(err);
@@ -45,6 +57,7 @@ class EntryDetail extends Component {
 	render() {
 		return (
 			<article className="entry-details">
+				{this.renderRedirect()}
 				<div className="image-and-caption">
 					<p className="map-caption">{this.state.entry.place_name}</p>
 					<img

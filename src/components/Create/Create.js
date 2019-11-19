@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Create.css';
+import { Redirect } from 'react-router-dom';
 
 function validate(title, place_name, photo_url, notes) {
 	return {
@@ -14,6 +15,7 @@ class Create extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			redirect: false,
 			username: this.props.match.params.username,
 			title: '',
 			place_name: '',
@@ -29,6 +31,16 @@ class Create extends Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 	}
+
+	setRedirect = () => {
+		this.setState({ redirect: true });
+	};
+
+	renderRedirect = () => {
+		if (this.state.redirect) {
+			return <Redirect to="/home" />;
+		}
+	};
 
 	handleChange(evt) {
 		this.setState({
@@ -61,9 +73,10 @@ class Create extends Component {
 			body: JSON.stringify(entry)
 		})
 			.then(res => {
-				setTimeout(() => {
-					this.props.history.push('/');
-				}, 500);
+				this.props.refreshEntries();
+			})
+			.then(res => {
+				this.setRedirect();
 			})
 			.catch(err => {
 				console.error(err);
@@ -86,8 +99,10 @@ class Create extends Component {
 		);
 
 		const isEnabled = !Object.keys(errors).some(x => errors[x]);
+
 		return (
 			<div className="new-form-container">
+				{this.renderRedirect()}
 				<h2>Create New Entry</h2>
 				<form onSubmit={this.handleSubmit} className="new-form">
 					{/* form input for title */}

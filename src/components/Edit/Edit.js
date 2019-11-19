@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../Create/Create.css';
 import Axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 // checks form fields to make sure value != null
 function validate(title, place_name, photo_url, notes) {
@@ -16,6 +17,7 @@ class Edit extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			redirect: false,
 			title: '',
 			place_name: '',
 			photo_url: '',
@@ -30,6 +32,16 @@ class Edit extends Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 	}
+
+	setRedirect = () => {
+		this.setState({ redirect: true });
+	};
+
+	renderRedirect = () => {
+		if (this.state.redirect) {
+			return <Redirect to="/home" />;
+		}
+	};
 
 	handleChange(evt) {
 		this.setState({
@@ -76,12 +88,10 @@ class Edit extends Component {
 			body: JSON.stringify(entry)
 		})
 			.then(res => {
-				console.log(res);
-				setTimeout(() => {
-					this.props.history.push({
-						pathname: `/${this.props.username}`
-					});
-				}, 2000);
+				this.props.refreshEntries();
+			})
+			.then(res => {
+				this.setRedirect();
 			})
 			.catch(err => {
 				console.error(err);

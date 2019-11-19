@@ -31,13 +31,23 @@ class App extends Component {
 		super(props);
 		this.state = {
 			shouldRefresh: false,
-			toHome: false,
+			redirect: false,
 			displayed_form: '',
 			logged_in: localStorage.getItem('token') ? true : false,
 			username: '',
 			entries: []
 		};
 	}
+
+	setRedirect = () => {
+		this.setState({ redirect: true });
+	};
+
+	renderRedirect = () => {
+		if (this.state.redirect) {
+			return <Redirect to="/home" />;
+		}
+	};
 
 	componentDidMount() {
 		if (this.state.logged_in) {
@@ -53,7 +63,7 @@ class App extends Component {
 				.then(json => {
 					this.setState({ username: json.username });
 				})
-				.then(() => this.refreshEntries());
+				.then(res => this.refreshEntries());
 		}
 	}
 
@@ -61,6 +71,9 @@ class App extends Component {
 		Axios.get(`https://esin-travelogue-api.herokuapp.com`)
 			.then(res => {
 				this.setState({ entries: res.data });
+			})
+			.then(res => {
+				this.setRedirect();
 			})
 			.catch(err => console.error(err));
 	};
@@ -84,10 +97,9 @@ class App extends Component {
 					username: json.user.username
 				});
 			})
-			.then(() => {
-				return <Redirect to="/home" />;
+			.then(res => {
+				this.refreshEntries();
 			})
-
 			.catch(err => {
 				console.error(err);
 			});
@@ -147,6 +159,8 @@ class App extends Component {
 				style={{
 					backgroundImage: isShown ? 'none' : `url(${CinqueTerre})`
 				}}>
+				{this.renderRedirect()}
+
 				<div
 					className="logged-in-nav-container"
 					style={{ display: isShown ? 'block' : 'none' }}>
@@ -189,12 +203,18 @@ class App extends Component {
 						exact={true}
 						path="/create"
 						username={this.state.username}
+						refreshEntries={this.refreshEntries}
 						component={Create}
 					/>
 					<Route
 						exact={true}
 						path="/entries/:entryid"
-						render={routerProps => <EntryDetail {...routerProps} />}
+						render={routerProps => (
+							<EntryDetail
+								{...routerProps}
+								refreshEntries={this.refreshEntries}
+							/>
+						)}
 					/>
 					<Route
 						exact={true}
@@ -203,6 +223,7 @@ class App extends Component {
 							<Edit
 								{...routerProps}
 								username={this.state.username}
+								refreshEntries={this.refreshEntries}
 							/>
 						)}
 					/>

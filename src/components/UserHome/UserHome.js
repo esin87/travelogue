@@ -5,9 +5,7 @@ import './UserHome.css';
 class UserHome extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			entries: this.props.entries
-		};
+		this.state = {};
 	}
 
 	componentDidMount() {
@@ -15,7 +13,7 @@ class UserHome extends Component {
 	}
 
 	render() {
-		let filteredEntries = this.state.entries.filter(
+		let filteredEntries = this.props.entries.filter(
 			entry => entry.owner === this.props.username
 		);
 
