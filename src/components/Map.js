@@ -17,7 +17,6 @@ class GoogleMap extends Component {
 			const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${this.props.placeName}&key=AIzaSyB6ON524 - NE8rxEhT8w2_keiyKHmRHNyB0`;
 			Axios.get(url)
 				.then(response => {
-					console.log(response.data);
 					this.setState({
 						coordinates: response.data.results[0].geometry.location
 					});
