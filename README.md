@@ -117,11 +117,15 @@ If you are interested in downloading the code for either stack:
 
 -   **Backend:** Run pipenv install in the virtual environment of the project directory CLI to download required dependencies such as Django, Django-Rest-Framework and JWT-Authentication. Then running python3 manage.py runserver will start a local version of the backend on port 8000.
 
-## Unsolved Problems and Future Directions
-
-My biggest unsolved problem is that refreshing my React frontend sometimes breaks the application. I also had to use some hacks to get the user home page to replace the landing login/signup page, and I would refactor the component hierarchy to make it less hack-y and more React-y. Additionally sometimes the JWT expires but does not fully log out the user. The page gets stuck on the home page, and the user has to manually take the "/home" path out of the URL to be able to reach the sign in page again.
+## Future Directions
 
 In terms of future directions: I plan to build out the app further, improving the authentication process, then prioritizing mobile responsiveness and social responsiveness, to allow users to create entries on the go and share their stories with their communities.
+
+## Contribution Guidelines
+
+All feedback and suggestions are welcome! Feel free to drop an issue.
+
+If you'd like to contribute to the codebase, please fork and clone this repo, then submit a pull request with any code changes.
 
 ## Useful Resources & Gratitude
 
@@ -130,5 +134,3 @@ I got to learn a lot of new technologies in the course of this project, but the 
 A couple great tutorials stood out: Thanks to Dakota Lillie over at Medium for posting a great [tutorial](https://medium.com/@dakota.lillie/django-react-jwt-authentication-5015ee00ef9a) on JWT Authentication with Django and React. Thank you also to Eleanor Stribling for the best Django to Heroku with PostgreSQL [blog post](https://medium.com/agatha-codes/9-straightforward-steps-for-deploying-your-django-app-with-heroku-82b952652fb4), which saved me from hours of debugging.
 
 Thank you to my wonderful instructors and classmates at General Assembly. It's been an incredible ride, and this is just the beginning. &hearts;
-
-Please drop an issue if you have any feedback or suggestions!
