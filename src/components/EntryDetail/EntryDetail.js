@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Axios from 'axios';
 import './EntryDetail.css';
 import { Link, Redirect } from 'react-router-dom';
-import GoogleMap from '../Map';
+// import GoogleMap from '../Map';
 
 class EntryDetail extends Component {
 	constructor(props) {
@@ -30,7 +30,7 @@ class EntryDetail extends Component {
 
 	renderRedirect = () => {
 		if (this.state.redirect) {
-			return <Redirect to="/home" />;
+			return <Redirect to='/home' />;
 		}
 	};
 
@@ -57,29 +57,29 @@ class EntryDetail extends Component {
 	render() {
 		console.log(this.state.entry.place_name);
 		return (
-			<article className="entry-details">
+			<article className='entry-details'>
 				{this.renderRedirect()}
-				<div className="image-and-caption">
-					<p className="map-caption">{this.state.entry.place_name}</p>
+				<div className='image-and-caption'>
+					<p className='map-caption'>{this.state.entry.place_name}</p>
 					<img
-						className="detail-image"
+						className='detail-image'
 						src={this.state.entry.photo_url}
 						alt={this.state.entry.place_name}
 					/>
-					{this.state.entry.place_name && (
+					{/* {this.state.entry.place_name && (
 						<GoogleMap placeName={this.state.entry.place_name} />
-					)}
+					)} */}
 				</div>
-				<div className="other-text">
-					<h2 className="entry-heading">
+				<div className='other-text'>
+					<h2 className='entry-heading'>
 						{this.state.entry.title}
 						<Link to={`/edit/${this.state.entry.id}`}> (edit)</Link>
 					</h2>
-					<p className="byline">By: {this.state.entry.owner}</p>
-					<p className="notes">{this.state.entry.notes}</p>
+					<p className='byline'>By: {this.state.entry.owner}</p>
+					<p className='notes'>{this.state.entry.notes}</p>
 					<p>Posted on: {this.state.entry.date}</p>
 					<p
-						className="delete-link"
+						className='delete-link'
 						onClick={() => {
 							if (
 								window.confirm(

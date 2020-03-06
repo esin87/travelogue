@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import Axios from 'axios';
 
-const devKey = 'AIzaSyB6ON524-NE8rxEhT8w2_keiyKHmRHNyB0';
 class GoogleMap extends Component {
 	constructor(props) {
 		super(props);
@@ -27,7 +26,7 @@ class GoogleMap extends Component {
 
 	render() {
 		return (
-			<div id="google-map" style={{ height: '200px', width: '100%' }}>
+			<div id='google-map' style={{ height: '200px', width: '100%' }}>
 				{this.state.coordinates && (
 					<GoogleMapReact
 						bootstrapURLKeys={{

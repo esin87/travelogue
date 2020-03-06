@@ -20,26 +20,26 @@ class LoginForm extends React.Component {
 
 	render() {
 		return (
-			<div className="auth-forms">
+			<div className='auth-forms'>
 				<form onSubmit={e => this.props.handle_login(e, this.state)}>
-					<label htmlFor="username">Username</label>
+					<label htmlFor='username'>Username</label>
 					<input
-						type="text"
-						name="username"
+						type='text'
+						name='username'
 						value={this.state.username}
 						onChange={this.handle_change}
 					/>
-					<label htmlFor="password">Password</label>
+					<label htmlFor='password'>Password</label>
 					<input
-						type="password"
-						name="password"
+						type='password'
+						name='password'
 						value={this.state.password}
 						onChange={this.handle_change}
 					/>
 					<input
-						className="submit-button"
-						type="submit"
-						value="LOG IN"
+						className='submit-button'
+						type='submit'
+						value='LOG IN'
 					/>
 				</form>
 			</div>

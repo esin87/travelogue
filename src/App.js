@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 // App components
-import Nav from './components/Nav/Nav';
 import About from './components/About/About.js';
-import LoginForm from './components/LogIn-SignUp/LoginForm';
-import SignupForm from './components/LogIn-SignUp/SignupForm';
+import Form from './components/LogIn-SignUp/Form.js';
 import UserHome from './components/UserHome/UserHome';
 import Create from './components/Create/Create';
 import Edit from './components/Edit/Edit';
@@ -16,23 +14,14 @@ import Axios from 'axios';
 
 //Background image
 import CinqueTerre from './assets/images/cinque-terre-828614_1920.jpg';
-// Other background image options
-// import Neuschwannstein from './assets/images/architecture-3095716_1920.jpg';
-// import BritishColumbia from './assets/images/british-columbia-3787200_1920.jpg';
-// import BoraBora from './assets/images/bora-bora-685303_1920.jpg';
-// import Hamburg from './assets/images/hamburg-3846525_1920.jpg';
-
-//API url
-// const API_URL = process.env.REACT_APP_API_URL;
-require('dotenv').config();
 
 class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			error: false,
+			logInErrorMessage: null,
 			redirect: false,
-			displayed_form: '',
 			logged_in: localStorage.getItem('token') ? true : false,
 			username: '',
 			entries: []
@@ -40,12 +29,14 @@ class App extends Component {
 	}
 
 	setRedirect = () => {
-		this.setState({ redirect: true });
+		if (this.state.logged_in) {
+			this.setState({ redirect: true });
+		}
 	};
 
 	renderRedirect = () => {
 		if (this.state.redirect) {
-			return <Redirect to="/home" />;
+			return <Redirect to='/home' />;
 		}
 	};
 
@@ -83,7 +74,7 @@ class App extends Component {
 			});
 	};
 
-	handle_login = (e, data) => {
+	handleLogin = (e, data) => {
 		e.preventDefault();
 
 		fetch('https://esin-travelogue-api.herokuapp.com/token-auth/', {
@@ -98,8 +89,8 @@ class App extends Component {
 				localStorage.setItem('token', json.token);
 				this.setState({
 					logged_in: true,
-					displayed_form: '',
-					username: json.user.username
+					username: json.user.username,
+					error: false
 				});
 			})
 			.then(res => {
@@ -107,11 +98,12 @@ class App extends Component {
 			})
 			.catch(err => {
 				this.setState({ error: true });
+				this.handleError();
 				console.error(err);
 			});
 	};
 
-	handle_signup = (e, data) => {
+	handleSignup = (e, data) => {
 		e.preventDefault();
 		fetch('https://esin-travelogue-api.herokuapp.com/core/users/', {
 			method: 'POST',
@@ -125,82 +117,92 @@ class App extends Component {
 				localStorage.setItem('token', json.token);
 				this.setState({
 					logged_in: true,
-					displayed_form: '',
 					username: json.username
 				});
+			})
+			.catch(err => {
+				this.setState({ error: true });
+				this.handleError();
+				console.error(err);
 			});
 	};
 
 	//Log out handler
-	handle_logout = () => {
+	handleLogout = () => {
 		localStorage.removeItem('token');
-		this.setState({ logged_in: false, username: '' });
-		return <Redirect to="/" />;
-	};
-
-	display_form = form => {
 		this.setState({
-			displayed_form: form
+			logged_in: false,
+			error: false,
+			logInErrorMessage: null,
+			username: '',
+			redirect: false
 		});
+		return <Redirect to='/' />;
 	};
 
-	render() {
-		//decide what form to render whether log in or sign up is clicked on
-		let form;
-		switch (this.state.displayed_form) {
-			case 'login':
-				form = <LoginForm handle_login={this.handle_login} />;
-				break;
-			case 'signup':
-				form = <SignupForm handle_signup={this.handle_signup} />;
-				break;
-			default:
-				form = null;
+	//Login/signup error handler
+	handleError = () => {
+		if (this.state.error) {
+			this.setState({
+				logInErrorMessage:
+					'That username and password combination does not exist.\nPlease try again or sign up.'
+			});
 		}
-		//use this state to determine what divs to show (mostly for logged in nav bar display)
-		const isShown = this.state.logged_in;
-
-		const logInErrorMessage = this.state.error
-			? 'That username and password combination does not exist.\nPlease try again or sign up.'
-			: null;
-
+	};
+	render() {
 		return (
 			<div
-				className="App"
+				className='App'
 				style={{
-					backgroundImage: isShown ? 'none' : `url(${CinqueTerre})`
+					backgroundImage: this.state.logged_in
+						? 'none'
+						: `url(${CinqueTerre})`
 				}}>
-				{this.renderRedirect()}
-
 				<div
-					className="logged-in-nav-container"
-					style={{ display: isShown ? 'block' : 'none' }}>
-					<div className="logged-in-nav">
-						<div className="logo">
+					className='logged-in-nav-container'
+					style={{
+						display: this.state.logged_in ? 'block' : 'none'
+					}}>
+					<div className='logged-in-nav'>
+						<div className='logo'>
 							<Link to={`/about`}>
 								<h4>TRAVELOGUE</h4>
 							</Link>
 						</div>
-						<div className="other-links">
+						<div className='other-links'>
 							<Link to={`/home`}>
-								<p className="greeting">
+								<p className='greeting'>
 									Hello, {this.state.username}!
 								</p>
 							</Link>
 							<Link to={`/create`}>
 								<p>New Entry</p>
 							</Link>
-							<p onClick={this.handle_logout} className="log-out">
+							<p onClick={this.handleLogout} className='log-out'>
 								Log Out
 							</p>
 						</div>
 					</div>
 				</div>
 				<Switch>
-					<Route exact={true} path="/about" component={About} />
 					<Route
 						exact={true}
-						path="/home"
+						path='/'
+						render={props => (
+							<Form
+								{...props}
+								handle_login={this.handleLogin}
+								handleSignup={this.handleSignup}
+								logged_in={this.state.logged_in}
+								error={this.state.error}
+								logInErrorMessage={this.state.logInErrorMessage}
+							/>
+						)}
+					/>
+					<Route exact={true} path='/about' component={About} />
+					<Route
+						exact={true}
+						path='/home'
 						render={routerProps => (
 							<UserHome
 								{...routerProps}
@@ -212,14 +214,14 @@ class App extends Component {
 					/>
 					<Route
 						exact={true}
-						path="/create"
+						path='/create'
 						username={this.state.username}
 						refreshEntries={this.refreshEntries}
 						component={Create}
 					/>
 					<Route
 						exact={true}
-						path="/entries/:entryid"
+						path='/entries/:entryid'
 						render={routerProps => (
 							<EntryDetail
 								{...routerProps}
@@ -229,7 +231,7 @@ class App extends Component {
 					/>
 					<Route
 						exact={true}
-						path="/edit/:entryid"
+						path='/edit/:entryid'
 						render={routerProps => (
 							<Edit
 								{...routerProps}
@@ -239,15 +241,9 @@ class App extends Component {
 						)}
 					/>
 				</Switch>
-				<Nav
-					logged_in={this.state.logged_in}
-					display_form={this.display_form}
-					handle_logout={this.handle_logout}
-				/>
-				{form}
-				<div className="errorMessage">{logInErrorMessage}</div>
-				{this.state.logged_in && <Redirect to="/home" />}
-				{!this.state.logged_in && <Redirect to="/" />}
+
+				{this.state.logged_in && <Redirect to='/home' />}
+				{!this.state.logged_in && <Redirect to='/' />}
 			</div>
 		);
 	}
