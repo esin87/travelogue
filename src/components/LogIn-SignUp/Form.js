@@ -17,6 +17,7 @@ class Form extends React.Component {
 			displayed_form: form
 		});
 	};
+
 	render() {
 		//decide what form to render whether log in or sign up is clicked on
 		let form;
@@ -41,7 +42,10 @@ class Form extends React.Component {
 					</p>
 					<p
 						className='log-in-buttons'
-						onClick={() => this.display_form('signup')}>
+						onClick={() => {
+							this.props.resetErrors();
+							this.display_form('signup');
+						}}>
 						SIGNUP
 					</p>
 				</div>
@@ -51,7 +55,11 @@ class Form extends React.Component {
 			<>
 				{this.props.logged_in ? null : logged_out_nav}
 				{form}
-				<div className='errorMessage'>
+				<div
+					className='errorMessage'
+					style={{
+						display: this.props.logInErrorMessage ? 'block' : 'none'
+					}}>
 					{this.props.logInErrorMessage}
 				</div>
 			</>

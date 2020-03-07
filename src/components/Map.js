@@ -13,7 +13,7 @@ class GoogleMap extends Component {
 
 	componentDidMount() {
 		if (this.state.placeName) {
-			const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${this.props.placeName}&key=AIzaSyB6ON524 - NE8rxEhT8w2_keiyKHmRHNyB0`;
+			const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${this.props.placeName}&key=null`;
 			Axios.get(url)
 				.then(response => {
 					this.setState({
@@ -30,7 +30,7 @@ class GoogleMap extends Component {
 				{this.state.coordinates && (
 					<GoogleMapReact
 						bootstrapURLKeys={{
-							key: 'AIzaSyB6ON524 - NE8rxEhT8w2_keiyKHmRHNyB0'
+							key: null
 						}}
 						center={this.state.coordinates}
 						zoom={14}

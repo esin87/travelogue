@@ -149,6 +149,11 @@ class App extends Component {
 			});
 		}
 	};
+
+	resetErrors = () => {
+		this.setState({ error: false, logInErrorMessage: null });
+	};
+
 	render() {
 		return (
 			<div
@@ -196,6 +201,7 @@ class App extends Component {
 								logged_in={this.state.logged_in}
 								error={this.state.error}
 								logInErrorMessage={this.state.logInErrorMessage}
+								resetErrors={this.resetErrors}
 							/>
 						)}
 					/>

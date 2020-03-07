@@ -45,3 +45,22 @@ input.submit-button {
 .submit-button:hover {
 	cursor: pointer;
 }
+
+.signupErrorBorder {
+	border: 2px solid black;
+}
+
+.error-message {
+	background-color: rgba(0, 0, 0, 0.5);
+	color: white;
+	font-size: smaller;
+}
+
+.signupErrors {
+	margin: 0 auto;
+	text-align: center;
+	background-color: rgba(0, 0, 0, 0.5);
+	color: black;
+	width: 50%;
+	padding: 1px;
+}
