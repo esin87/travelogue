@@ -68,7 +68,3 @@ class Form extends React.Component {
 }
 
 export default Form;
-
-Form.propTypes = {
-	logged_in: PropTypes.bool.isRequired
-};
