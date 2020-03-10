@@ -55,7 +55,6 @@ class EntryDetail extends Component {
 	};
 
 	render() {
-		console.log(this.state.entry.place_name);
 		return (
 			<article className='entry-details'>
 				{this.renderRedirect()}

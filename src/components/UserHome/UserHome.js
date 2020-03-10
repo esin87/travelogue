@@ -3,11 +3,6 @@ import Entry from '../Entry/Entry';
 import './UserHome.css';
 
 class UserHome extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {};
-	}
-
 	componentDidMount() {
 		this.props.refreshEntries();
 	}
@@ -19,7 +14,7 @@ class UserHome extends Component {
 
 		let listOfEntries = filteredEntries.map(entry => {
 			return (
-				<div className="entry" key={entry.title}>
+				<div className='entry' key={entry.title}>
 					<Entry
 						title={entry.title}
 						photo={entry.photo_url}
@@ -33,10 +28,10 @@ class UserHome extends Component {
 			);
 		});
 		return (
-			<div className="user-home-container">
-				<h1 className="dashboard">My Entries</h1>
+			<div className='user-home-container'>
+				<h1 className='dashboard'>My Entries</h1>
 				<p>Click on an entry to view, edit or delete.</p>
-				<div className="entries-container">{listOfEntries}</div>
+				<div className='entries-container'>{listOfEntries}</div>
 			</div>
 		);
 	}
