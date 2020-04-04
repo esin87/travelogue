@@ -16,8 +16,8 @@ Travelogue allows users to create travel diary entries that include the entry ti
 
 ## Travelogue User Stories
 
--   **What does the Travelogue user want?** The Travelogue user wants a place to document and remember the details of their journeys, whether for the purposes of future visits, social sharing and recommendations, or just to preserve the memory.
--   **How will the application satisfy the user?** The Travelogue user will be satisfied if they can keep a travel diary that records their journeys, with entries detailing specific aspects of an experience, including dates, notes, maps, and pictures. The user will also want to be able to read, update, and delete travel diary entries.
+- **What does the Travelogue user want?** The Travelogue user wants a place to document and remember the details of their journeys, whether for the purposes of future visits, social sharing and recommendations, or just to preserve the memory.
+- **How will the application satisfy the user?** The Travelogue user will be satisfied if they can keep a travel diary that records their journeys, with entries detailing specific aspects of an experience, including dates, notes, maps, and pictures. The user will also want to be able to read, update, and delete travel diary entries.
 
 ## Wireframing & Planning
 
@@ -45,12 +45,12 @@ Users who log in or sign up have full CRUD access to their entries with basic fo
 
 ## Code Sample
 
-A frontend code snippet I'm proud of is figuring out how to reverse-geocode to render a Google Map using the Google Maps JS API, Google Geocode API, and the Google-Map-React npm. I didn't want the user to have to find the geographic coordinates associated with their entry, so I reverse-looked up the coordinates from the address location provided, then plugged those coordinates into the center property of the Google Map component to render that location. Thank you to the creators of the Google-Map-React [package](https://github.com/google-map-react/google-map-react), which made this process so much easier! (N.b., this feature is currently disabled due an API key security issue.)
+A frontend code snippet I'm proud of is figuring out how to reverse-geocode to render a Google Map using the Google Maps JS API, Google Geocode API, and the Google-Map-React npm. I didn't want the user to have to find the geographic coordinates associated with their entry, so I reverse-looked up the coordinates from the address location provided, then plugged those coordinates into the center property of the Google Map component to render that location. Thank you to the creators of the Google-Map-React [package](https://github.com/google-map-react/google-map-react), which made this process so much easier!
 
 ```javascript
 	componentDidMount() {
 		if (this.state.placeName) {
-			const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${this.props.placeName}&key=${this.devKey}`;
+			const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${this.props.placeName}&key=${apiKEY}`;
 			Axios.get(url)
 				.then(response => {
 					this.setState({
@@ -86,36 +86,36 @@ A frontend code snippet I'm proud of is figuring out how to reverse-geocode to r
 
 Travelogue is currently at the Silver Level:
 
--   **Bronze/Minimum Viable Product:**
+- **Bronze/Minimum Viable Product:**
 
-    -   [x] Backend built with Django and deployed via Heroku
-    -   [x] Frontend built with React and deployed via GitHub Pages
-    -   [x] Homepage with clickable array of entries
-    -   [x] Create, read, update, and delete functionality on entries
+  - [x] Backend built with Django and deployed via Heroku
+  - [x] Frontend built with React and deployed via GitHub Pages
+  - [x] Homepage with clickable array of entries
+  - [x] Create, read, update, and delete functionality on entries
 
--   **Silver:**
+- **Silver:**
 
-    -   [x] Interactive map showcasing entry location through Google Maps API and Google Geocode APIs (this feature is currently disabled due to an API key issue)
-    -   [x] User Model with JWT Authentication on the backend for all data create, update and destroy routes, integrated into the frontend
-    -   [x] Form validation in React for create/edit functions
-    -   [ ] Mobile responsive design
+  - [x] Interactive map showcasing entry location through Google Maps API and Google Geocode APIs (this feature is currently disabled due to an API key issue)
+  - [x] User Model with JWT Authentication on the backend for all data create, update and destroy routes, integrated into the frontend
+  - [x] Form validation in React for create/edit functions
+  - [ ] Mobile responsive design
 
-*   **Gold:**
+* **Gold:**
 
-    -   [ ] Search entries by title and/or keywords
-    -   [ ] User image file uploads (instead of URL)
-    -   [ ] Social O-Auth with social share feature
+  - [ ] Search entries by title and/or keywords
+  - [ ] User image file uploads (instead of URL)
+  - [ ] Social O-Auth with social share feature
 
--   **Platinum:**
-    -   [ ] Users can see, like and comment on other user's entries
+- **Platinum:**
+  - [ ] Users can see, like and comment on other user's entries
 
 ## Installation Instructions
 
 If you are interested in downloading the code for either stack:
 
--   **Frontend:** Run npm install in the project directory via CLI to download required dependencies such as React-Router and Google-Map-React. Then npm run start will start the application on localhost:3000.
+- **Frontend:** Run npm install in the project directory via CLI to download required dependencies such as React-Router and Google-Map-React. Then npm run start will start the application on localhost:3000.
 
--   **Backend:** Run pipenv install in the virtual environment of the project directory CLI to download required dependencies such as Django, Django-Rest-Framework and JWT-Authentication. Then running python3 manage.py runserver will start a local version of the backend on port 8000.
+- **Backend:** Run pipenv install in the virtual environment of the project directory CLI to download required dependencies such as Django, Django-Rest-Framework and JWT-Authentication. Then running python3 manage.py runserver will start a local version of the backend on port 8000.
 
 ## Future Directions
 
