@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Axios from 'axios';
 import './EntryDetail.css';
 import { Link, Redirect } from 'react-router-dom';
-// import GoogleMap from '../Map';
+import GoogleMap from '../Map';
 
 class EntryDetail extends Component {
 	constructor(props) {
@@ -10,18 +10,16 @@ class EntryDetail extends Component {
 		this.state = {
 			entryId: this.props.match.params.entryid,
 			entry: '',
-			redirect: false
+			redirect: false,
 		};
 	}
 
 	componentDidMount() {
-		Axios.get(
-			`https://esin-travelogue-api.herokuapp.com/${this.state.entryId}`
-		)
-			.then(response => {
+		Axios.get(`https://esin-travelogue-api.herokuapp.com/${this.state.entryId}`)
+			.then((response) => {
 				this.setState({ entry: response.data });
 			})
-			.catch(err => console.error(err));
+			.catch((err) => console.error(err));
 	}
 
 	setRedirect = () => {
@@ -40,16 +38,16 @@ class EntryDetail extends Component {
 			method: 'DELETE',
 			headers: {
 				'Content-Type': 'application/json',
-				Authorization: `JWT ${localStorage.getItem('token')}`
-			}
+				Authorization: `JWT ${localStorage.getItem('token')}`,
+			},
 		})
-			.then(res => {
+			.then((res) => {
 				this.props.refreshEntries();
 			})
-			.then(res => {
+			.then((res) => {
 				this.setRedirect();
 			})
-			.catch(err => {
+			.catch((err) => {
 				console.error(err);
 			});
 	};
@@ -66,9 +64,9 @@ class EntryDetail extends Component {
 						src={this.state.entry.photo_url}
 						alt={this.state.entry.place_name}
 					/>
-					{/* {this.state.entry.place_name && (
+					{this.state.entry.place_name && (
 						<GoogleMap placeName={this.state.entry.place_name} />
-					)} */}
+					)}
 				</div>
 				<div className='other-text'>
 					<h2 className='entry-heading'>
@@ -81,11 +79,7 @@ class EntryDetail extends Component {
 					<p
 						className='delete-link'
 						onClick={() => {
-							if (
-								window.confirm(
-									'Are you sure you wish to delete this entry?'
-								)
-							)
+							if (window.confirm('Are you sure you wish to delete this entry?'))
 								this.delete();
 						}}>
 						DELETE
