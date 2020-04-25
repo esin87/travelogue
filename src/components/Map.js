@@ -6,13 +6,12 @@ class GoogleMap extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			placeName: this.props.placeName,
 			coordinates: '',
 		};
 	}
 
 	componentDidMount() {
-		if (this.state.placeName) {
+		if (this.props.placeName) {
 			const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${this.props.placeName}&key=${apiKey}`;
 			Axios.get(url)
 				.then((response) => {
@@ -25,23 +24,31 @@ class GoogleMap extends Component {
 	}
 
 	render() {
-		return (
-			<div id='google-map' style={{ height: '200px', width: '100%' }}>
-				{this.state.coordinates && (
-					<GoogleMapReact
-						bootstrapURLKeys={{
-							key: apiKey,
-						}}
-						center={this.state.coordinates}
-						zoom={14}
-						yesIWantToUseGoogleMapApiInternals
-						size={{
-							width: '100%',
-							height: '100',
-						}}></GoogleMapReact>
-				)}
-			</div>
-		);
+		if (this.state.coordinates) {
+			return (
+				<div id='google-map' style={{ height: '200px', width: '100%' }}>
+					{this.state.coordinates && (
+						<GoogleMapReact
+							bootstrapURLKeys={{
+								key: apiKey,
+							}}
+							center={this.state.coordinates}
+							zoom={14}
+							yesIWantToUseGoogleMapApiInternals
+							size={{
+								width: '100%',
+								height: '100',
+							}}></GoogleMapReact>
+					)}
+				</div>
+			);
+		} else {
+			return (
+				<div id='google-map' style={{ height: '200px', width: '100%' }}>
+					Loading Google Map...
+				</div>
+			);
+		}
 	}
 }
 export default GoogleMap;

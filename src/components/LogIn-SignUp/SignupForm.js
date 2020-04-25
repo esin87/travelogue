@@ -1,33 +1,37 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
 import './Forms.css';
 
 class SignupForm extends React.Component {
-	state = {
-		username: '',
-		password: '',
-		touched: {
-			username: false,
-			password: false
-		}
-	};
+	constructor(props) {
+		super(props);
+		this.state = {
+			username: '',
+			password: '',
+			touched: {
+				username: false,
+				password: false,
+			},
+		};
+	}
 
-	handle_change = e => {
+	handle_change = (e) => {
 		const name = e.target.name;
 		const value = e.target.value;
-		this.setState(prevstate => {
-			const newState = { ...prevstate };
+		this.setState((prevState) => {
+			const newState = { ...prevState };
 			newState[name] = value;
 			return newState;
 		});
 	};
 
-	handleBlur = field => evt => {
+	handleBlur = (field) => (evt) => {
 		this.setState({
-			touched: { ...this.state.touched, [field]: true }
+			touched: { ...this.state.touched, [field]: true },
 		});
 	};
 
-	validatePassword = password => {
+	validatePassword = (password) => {
 		const errors = [];
 		if (password.length === 0) {
 			errors.push('Must provide a password.');
@@ -37,7 +41,7 @@ class SignupForm extends React.Component {
 		return errors;
 	};
 
-	validateUserName = username => {
+	validateUserName = (username) => {
 		const errors = [];
 		if (username.length === 0) {
 			errors.push('Must provide a username.');
@@ -74,8 +78,7 @@ class SignupForm extends React.Component {
 		return (
 			<div>
 				<div className='auth-forms'>
-					<form
-						onSubmit={e => this.props.handle_signup(e, this.state)}>
+					<form onSubmit={(e) => this.props.handle_signup(e, this.state)}>
 						<label htmlFor='username'>Username</label>
 						<input
 							type='text'
@@ -83,11 +86,7 @@ class SignupForm extends React.Component {
 							value={this.state.username}
 							onChange={this.handle_change}
 							onBlur={this.handleBlur('username')}
-							className={
-								shouldMarkUserNameError()
-									? 'signupErrorBorder'
-									: ''
-							}
+							className={shouldMarkUserNameError() ? 'signupErrorBorder' : ''}
 						/>
 
 						<label htmlFor='password'>Password</label>
@@ -97,11 +96,7 @@ class SignupForm extends React.Component {
 							value={this.state.password}
 							onChange={this.handle_change}
 							onBlur={this.handleBlur('password')}
-							className={
-								shouldMarkPasswordError()
-									? 'signupErrorBorder'
-									: ''
-							}
+							className={shouldMarkPasswordError() ? 'signupErrorBorder' : ''}
 						/>
 
 						<input
@@ -116,18 +111,18 @@ class SignupForm extends React.Component {
 				<div
 					className='signupErrors'
 					style={{
-						display: shouldMarkUserNameError() ? 'block' : 'none'
+						display: shouldMarkUserNameError() ? 'block' : 'none',
 					}}>
 					{this.state.touched.username &&
-						userNameErrors.map(error => <p key={error}>{error}</p>)}
+						userNameErrors.map((error) => <p key={error}>{error}</p>)}
 				</div>
 				<div
 					className='signupErrors'
 					style={{
-						display: shouldMarkPasswordError() ? 'block' : 'none'
+						display: shouldMarkPasswordError() ? 'block' : 'none',
 					}}>
 					{this.state.touched.password &&
-						passwordErrors.map(error => <p key={error}>{error}</p>)}
+						passwordErrors.map((error) => <p key={error}>{error}</p>)}
 				</div>
 			</div>
 		);
@@ -135,3 +130,7 @@ class SignupForm extends React.Component {
 }
 
 export default SignupForm;
+
+SignupForm.propTypes = {
+	handle_signup: PropTypes.func.isRequired,
+};
