@@ -54,3 +54,8 @@ input.submit-button {
 .error {
 	border: 1px solid red;
 }
+
+.post-error {
+	text-align: center;
+	color: red;
+}
