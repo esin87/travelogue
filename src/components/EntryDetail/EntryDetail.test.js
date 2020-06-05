@@ -1,12 +1,10 @@
 import React from 'react';
-import { render } from 'enzyme';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { shallow } from 'enzyme';
 
-import UserHome from './UserHome';
+import EntryDetail from './EntryDetail';
 
-describe('User home component', () => {
+describe('Entry Detail component', () => {
 	let component;
-
 	let entryProp = [
 		{
 			title: 'The Heart and Seoul',
@@ -20,23 +18,16 @@ describe('User home component', () => {
 			owner: 'Jimmy',
 		},
 	];
+	let match = { params: { entryid: 1 } };
 	beforeEach(() => {
-		component = render(
-			<Router>
-				<UserHome entries={entryProp} username={'Jimmy'} />
-			</Router>
-		);
+		component = shallow(<EntryDetail match={match} />);
 	});
 
-	it('should have a header that says "My Entries"', () => {
-		expect(component.find('h1').text()).toBe('My Entries');
+	it('should initialize with state entry variable empty', () => {
+		expect(component.state('entry')).toBe('');
 	});
 
-	it('should have one div with className entry', () => {
-		expect(component.find('.entry').length).toBe(1);
-	});
-
-	it('should render the entry with the correct title', () => {
-		expect(component.find('h3').text()).toBe('The Heart and Seoul');
+	it('should initialize with state entryId equivalent to entryid passed as prop', () => {
+		expect(component.state('entryId')).toBe(1);
 	});
 });
