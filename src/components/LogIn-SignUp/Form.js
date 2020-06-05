@@ -2,7 +2,6 @@ import React from 'react';
 import LoginForm from './LoginForm';
 import SignupForm from './SignupForm';
 import './Form.css';
-import PropTypes from 'prop-types';
 
 class Form extends React.Component {
 	constructor(props) {
@@ -37,11 +36,13 @@ class Form extends React.Component {
 				<div id='registration-options'>
 					<p
 						className='log-in-buttons'
+						id='login'
 						onClick={() => this.display_form('login')}>
 						LOGIN
 					</p>
 					<p
 						className='log-in-buttons'
+						id='signup'
 						onClick={() => {
 							this.props.resetErrors();
 							this.display_form('signup');
@@ -68,7 +69,3 @@ class Form extends React.Component {
 }
 
 export default Form;
-
-Form.propTypes = {
-	logged_in: PropTypes.bool.isRequired
-};

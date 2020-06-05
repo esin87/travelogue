@@ -1,7 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import './Forms.css';
-
+import { PropTypes } from 'prop-types';
 class SignupForm extends React.Component {
 	constructor(props) {
 		super(props);

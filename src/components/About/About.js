@@ -5,8 +5,8 @@ import './About.css';
 class About extends React.Component {
 	render() {
 		return (
-			<div className="about">
-				<Link to="/">
+			<div className='about'>
+				<Link to='/'>
 					<h1>TRAVELOGUE</h1>
 				</Link>
 				<p>
@@ -26,9 +26,9 @@ class About extends React.Component {
 				<p>
 					Made with &hearts; by{' '}
 					<a
-						href="https://esinsaribudak.com"
-						target="_blank"
-						rel="noopener noreferrer">
+						href='https://esinsaribudak.com'
+						target='_blank'
+						rel='noopener noreferrer'>
 						Esin Saribudak
 					</a>{' '}
 					&copy; 2019
