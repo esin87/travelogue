@@ -45,40 +45,48 @@ Users who log in or sign up have full CRUD access to their entries with basic fo
 
 ## Code Sample
 
-A frontend code snippet I'm proud of is figuring out how to reverse-geocode to render a Google Map using the Google Maps JS API, Google Geocode API, and the Google-Map-React npm. I didn't want the user to have to find the geographic coordinates associated with their entry, so I reverse-looked up the coordinates from the address location provided, then plugged those coordinates into the center property of the Google Map component to render that location. Thank you to the creators of the Google-Map-React [package](https://github.com/google-map-react/google-map-react), which made this process so much easier!
+A frontend code snippet I'm proud of is figuring out how to reverse-geocode to render a Google Map using the Google Maps JS API, Google Geocode API, and the Google-Map-React npm. I didn't want the user to have to find the geographic coordinates associated with their entry, so I reverse-looked up the coordinates from the address location provided in an API call to the Geocoding resource, then plugged those coordinates into the center property of the Google Map component to render that location. Thank you to the creators of the Google-Map-React [package](https://github.com/google-map-react/google-map-react), which made this process so much easier!
 
 ```javascript
-	componentDidMount() {
-		if (this.state.placeName) {
-			const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${this.props.placeName}&key=${apiKEY}`;
+componentDidMount() {
+		if (this.props.placeName) {
+			const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${this.props.placeName}&key=${apiKey}`;
 			Axios.get(url)
-				.then(response => {
+				.then((response) => {
 					this.setState({
-						coordinates: response.data.results[0].geometry.location
+						coordinates: response.data.results[0].geometry.location,
 					});
 				})
-				.catch(err => console.error(err));
+				.catch((err) => console.error(err));
 		}
 	}
 
 	render() {
-		return (
-			<div id="google-map" style={{ height: '200px', width: '100%' }}>
-				{this.state.coordinates && (
-					<GoogleMapReact
-						bootstrapURLKeys={{
-							key: this.devKey
-						}}
-						center={this.state.coordinates}
-						zoom={14}
-						yesIWantToUseGoogleMapApiInternals
-						size={{
-							width: '100%',
-							height: '100'
-						}}></GoogleMapReact>
-				)}
-			</div>
-		);
+		if (this.state.coordinates) {
+			return (
+				<div id='google-map' style={{ height: '200px', width: '100%' }}>
+					{this.state.coordinates && (
+						<GoogleMapReact
+							bootstrapURLKeys={{
+								key: apiKey,
+							}}
+							center={this.state.coordinates}
+							zoom={14}
+							yesIWantToUseGoogleMapApiInternals
+							size={{
+								width: '100%',
+								height: '100',
+							}}></GoogleMapReact>
+					)}
+				</div>
+			);
+		} else {
+			return (
+				<div id='google-map' style={{ height: '200px', width: '100%' }}>
+					Loading Google Map...
+				</div>
+			);
+		}
 	}
 ```
 
