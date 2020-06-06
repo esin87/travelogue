@@ -33,7 +33,7 @@ Additionally, this was my first time building an application with a React fronte
 
 ## Technical Specifications
 
-This git repo hosts the frontend for my Travelogue application. The frontend was built with React and deployed via GitHub Pages, and the backend is built with a Django REST framework using a PostgreSQL database, deployed via Heroku (the web dynos need a moment to wake up when the user logs in/signs up). I chose React, a frontend JSX framework, because it creates a single-page application with dynamic client-side component rendering, creating a seamless user experience and cutting down on server wait time.
+This git repo hosts the frontend for my Travelogue application. The frontend was built with React and deployed via JHeroku, and the backend is built with a Django REST framework using a PostgreSQL database, deployed via Heroku. I chose React, a frontend JavaScript framework, because it creates a single-page application with dynamic client-side component rendering, creating a seamless user experience and cutting down on client-side rendering wait time.
 
 Special features include a Google Maps component that calls both the Google Maps and the Google Geocode APIs in the Entry Detail view as shown below.
 
@@ -45,7 +45,7 @@ Users who log in or sign up have full CRUD access to their entries with basic fo
 
 ## Code Sample
 
-A frontend code snippet I'm proud of is figuring out how to reverse-geocode to render a Google Map using the Google Maps JS API, Google Geocode API, and the Google-Map-React npm. I didn't want the user to have to find the geographic coordinates associated with their entry, so I reverse-looked up the coordinates from the address location provided in an API call to the Geocoding resource, then plugged those coordinates into the center property of the Google Map component to render that location. Thank you to the creators of the Google-Map-React [package](https://github.com/google-map-react/google-map-react), which made this process so much easier!
+A frontend code snippet I'm proud of is figuring out how to reverse-geocode to render a Google Map using the Google Maps JS API, Google Geocode API, and the Google-Map-React npm package. I didn't want the user to have to find the geographic coordinates associated with their entry, so I reverse-looked up the coordinates from the address location provided in an API call to the Geocoding resource, then plugged those coordinates into the center property of the Google Map component to render that location. Thank you to the creators of the Google-Map-React [package](https://github.com/google-map-react/google-map-react), which made this process so much easier!
 
 ```javascript
 componentDidMount() {
@@ -103,7 +103,7 @@ Travelogue is currently at the Silver Level:
 
 - **Silver:**
 
-  - [x] Interactive map showcasing entry location through Google Maps API and Google Geocode APIs (this feature is currently disabled due to an API key issue)
+  - [x] Interactive map showcasing entry location through Google Maps API and Google Geocode APIs
   - [x] User Model with JWT Authentication on the backend for all data create, update and destroy routes, integrated into the frontend
   - [x] Form validation in React for create/edit functions
   - [ ] Mobile responsive design
