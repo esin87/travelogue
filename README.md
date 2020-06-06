@@ -33,7 +33,7 @@ Additionally, this was my first time building an application with a React fronte
 
 ## Technical Specifications
 
-This git repo hosts the frontend for my Travelogue application. The frontend was built with React and deployed via JHeroku, and the backend is built with a Django REST framework using a PostgreSQL database, deployed via Heroku. I chose React, a frontend JavaScript framework, because it creates a single-page application with dynamic client-side component rendering, creating a seamless user experience and cutting down on client-side rendering wait time.
+This git repo hosts the frontend for my Travelogue application. The frontend was built with React and deployed via Heroku, and the backend is built with a Django REST framework using a PostgreSQL database, deployed via Heroku. I chose React, a frontend JavaScript framework, because it creates a single-page application with dynamic client-side component rendering, creating a seamless user experience and cutting down on client-side rendering wait time.
 
 Special features include a Google Maps component that calls both the Google Maps and the Google Geocode APIs in the Entry Detail view as shown below.
 
